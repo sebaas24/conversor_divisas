@@ -27,9 +27,11 @@ jobs:
         run: |
           npm run build
 
+      # Nota: Si la carpeta 'android' ya existe en tu repo, el comando 'add' podría fallar.
+      # El '|| true' evita que el pipeline se detenga si la plataforma ya existe.
       - name: Install Capacitor Android Platform
         run: |
-          npx cap add android
+          npx cap add android || true
           npx cap sync android
 
       - name: Set up JDK
@@ -38,9 +40,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Force Java 17 in Gradle
-        run: |
-          echo "org.gradle.java.home=/usr/lib/jvm/temurin-17-amd64" >> android/gradle.properties
+      # ESTE PASO ES CRUCIAL EN LINUX
+      - name: Grant execute permission for gradlew
+        run: chmod +x android/gradlew
 
       - name: Build APK
         run: |
