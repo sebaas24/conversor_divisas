@@ -27,22 +27,18 @@ jobs:
         run: |
           npm run build
 
-      # Se agrega '|| true' para que no falle si la carpeta android ya existe
       - name: Install Capacitor Android Platform
         run: |
           npx cap add android || true
           npx cap sync android
 
+      # CAMBIO AQUÍ: Actualizado a Java 21
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
 
-      # IMPORTANTE: Eliminé el paso "Force Java 17" porque causaba el error.
-      # setup-java ya configura la variable JAVA_HOME automáticamente.
-
-      # IMPORTANTE: Dar permisos de ejecución al script de Gradle
       - name: Grant execute permission for gradlew
         run: chmod +x android/gradlew
 
