@@ -21,12 +21,13 @@ jobs:
         run: |
           npm install
           npm install -g @capacitor/cli
+          npm install @capacitor/android
 
       - name: Build Ionic
         run: |
           npm run build
 
-      - name: Install Capacitor Android
+      - name: Install Capacitor Android Platform
         run: |
           npx cap add android
           npx cap sync android
