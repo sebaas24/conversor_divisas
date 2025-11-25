@@ -38,6 +38,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Force Java 17 in Gradle
+        run: |
+          echo "org.gradle.java.home=/usr/lib/jvm/temurin-17-amd64" >> android/gradle.properties
+
       - name: Build APK
         run: |
           cd android
