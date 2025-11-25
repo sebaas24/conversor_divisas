@@ -1,0 +1,7 @@
+{
+  "name": "conversor_divisas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
