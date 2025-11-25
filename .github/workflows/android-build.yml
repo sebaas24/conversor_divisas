@@ -15,16 +15,20 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install -g @capacitor/cli
 
       - name: Build Ionic
-        run: npm run build
+        run: |
+          npm run build
 
       - name: Install Capacitor Android
         run: |
+          npx cap add android
           npx cap sync android
 
       - name: Set up JDK
@@ -36,7 +40,6 @@ jobs:
       - name: Build APK
         run: |
           cd android
-          chmod +x ./gradlew
           ./gradlew assembleDebug
 
       - name: Upload APK
